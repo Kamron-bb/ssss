@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Портфолио | Камрон Камолов</title>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body, html {
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    #login-form, #site-content {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 12px;
+      max-width: 700px;
+      width: 100%;
+      padding: 40px 50px;
+      box-sizing: border-box;
+      animation: fadeIn 0.5s ease forwards;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
+      position: relative;
+      z-index: 10;
+    }
+
+    #site-content {
+      display: none;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Login form styles */
+    #login-form h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #0d0d4a;
+      font-size: 2rem;
+      letter-spacing: 1.5px;
+    }
+
+    #login-form input {
+      display: block;
+      width: 100%;
+      padding: 14px 18px;
+      margin-bottom: 25px;
+      border: 2px solid #0d0d4a;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      outline: none;
+      background: rgba(255,255,255,0.9);
+    }
+    #login-form input:focus {
+      border-color: #4a4aff;
+      box-shadow: 0 0 8px #4a4aff;
+    }
+
+    #login-form button {
+      width: 100%;
+      background: #4a4aff;
+      border: none;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+      padding: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(74, 74, 255, 0.6);
+      transition: background-color 0.3s ease;
+    }
+    #login-form button:hover {
+      background: #000dff;
+    }
+
+    #error {
+      text-align: center;
+      color: #d62828;
+      margin-top: -18px;
+      margin-bottom: 20px;
+      min-height: 22px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* Site content styles */
+    header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+    header h1 {
+      font-size: 3rem;
+      color: #0d0d4a;
+      margin-bottom: 8px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #555;
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+    section h2 {
+      font-size: 2rem;
+      color: #0d0d4a;
+      border-bottom: 3px solid #4a4aff;
+      padding-bottom: 8px;
+      margin-bottom: 22px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 25px;
+      font-size: 1.1rem;
+      color: #333;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    .project {
+      background: #f4f6ff;
+      padding: 20px 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(13, 13, 74, 0.12);
+      transition: box-shadow 0.3s ease;
+    }
+    .project:hover {
+      box-shadow: 0 8px 25px rgba(13, 13, 74, 0.25);
+    }
+    .project h3 {
+      font-size: 1.4rem;
+      color: #1a237e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+    .project p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .project a {
+      font-weight: 700;
+      color: #4a4aff;
+      text-decoration: none;
+      font-size: 1.05rem;
+      transition: color 0.3s;
+    }
+    .project a:hover {
+      text-decoration: underline;
+      color: #000dff;
+    }
+
+    #contact p {
+      font-size: 1.1rem;
+      color: #222;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+    #contact a {
+      color: #4a4aff;
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.3s;
+    }
+    #contact a:hover {
+      color: #000dff;
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 20px;
+      font-weight: 600;
+      color: #666;
+      font-size: 0.95rem;
+      border-top: 1px solid #ddd;
+      letter-spacing: 0.4px;
+    }
+
+    /* Кнопка заявки */
+    #request-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #4a4aff;
+      color: #fff;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+      z-index: 100;
+      display: none;
+    }
+    #request-btn:hover {
+      background: #000dff;
+    }
+
+    /* Модалка */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 200;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+    .modal-content h2 {
+      margin-bottom: 20px;
+      color: #0d0d4a;
+    }
+    .modal-content input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1.5px solid #0d0d4a;
+      font-size: 1rem;
+    }
+    .modal-content button {
+      background: #4a4aff;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .modal-content button:hover {
+      background: #000dff;
+    }
+    #close-modal {
+      position: absolute;
+      top: 12px; right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #444;
+    }
+    #req-success {
+      margin-top: 12px;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      #request-btn {
+        top: 70px;
+        right: 10px;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Форма входа -->
+  <div id="login-form">
+    <h2><i class="fas fa-lock"></i> Вход</h2>
+    <input type="text" id="username" placeholder="Логин" />
+    <input type="password" id="password" placeholder="Пароль" />
+    <button onclick="login()">Войти</button>
+    <p id="error"></p>
+  </div>
+
+  <!-- Контент -->
+  <div id="site-content">
+    <header>
+      <h1>Камрон Камолов</h1>
+      <p>Backend-разработчик и аналитик данных</p>
+    </header>
+
+    <section id="about">
+      <h2>👨‍💻 Обо мне</h2>
+      <p>
+        Привет! Я начинающий разработчик и аналитик. Изучаю Python и базы данных.
+        Люблю автоматизировать скучные задачи и создавать полезные проекты.
+      </p>
+    </section>
+
+    <section id="skills">
+      <h2>🛠️ Навыки</h2>
+      <ul>
+        <li>Python (Flask, Django)</li>
+        <li>SQL (PostgreSQL)</li>
+        <li>Создание Telegram ботов</li>
+        <li>Аналитика данных</li>
+      </ul>
+    </section>
+
+    <section id="projects">
+      <h2>📘 Учёба</h2>
+      <div class="project">
+        <h3><i class="fas fa-file-alt"></i> Английский</h3>
+        <p>В 9 классе получил сертификат multilevel B2, сейчас готовлюсь к IELTS.</p>
+        <a href="https://app.uzbmb.uz/cefr/certificates/161315ac4c7dc63f4d406dc39f44528a.pdf" target="_blank">🔗 Multilevel</a>
+      </div>
+      <div class="project">
+        <h3><i class="fas fa-calculator"></i> Математика</h3>
+        <p>Проходил подготовительный курс в университете ИНХА и поступил.</p>
+        <a href="https://ums.inha.uz/#/check/certificate/b82f012e-29fb-4af8-a7f4-251229aaa2b5" target="_blank">🔗 INHA</a>
+      </div>
+      <div class="project">
+        <h3><i class="fas fa-code"></i> IT</h3>
+        <p>Учился в академии USTUDY, получил сертификат по аналитике данных.</p>
+        <a href="https://online.ustudy.uz/confirm-certificate?id=0e1216b8-11c1-4c4b-e4e7-08ddbf8e167d" target="_blank">🔗 CERTIFICATE</a>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>📬 Контакты</h2>
+      <p><i class="fas fa-envelope"></i>Email: <a href="mailto:kamolovkamron34@gmail.com">kamolovkamron34@gmail.com</a></p>
+      <p><i class="fab fa-instagram"></i>Instagram: <a href="https://www.instagram.com/neomrivz" target="_blank">neomrivz</a></p>
+      <p><i class="fab fa-telegram"></i>Telegram: <a href="https://t.me/SkyToStarsS" target="_blank">@SkyToStarsS</a></p>
+    </section>
+
+    <footer>
+      <p>© 2025 Камрон Камолов</p>
+    </footer>
+  </div>
+
+  <!-- Кнопка заявки -->
+  <button id="request-btn">📝 Оставить заявку</button>
+
+  <!-- Модалка -->
+  <div id="request-modal" class="modal">
+    <div class="modal-content">
+      <span id="close-modal">&times;</span>
+      <h2>Оставить заявку</h2>
+      <input type="text" id="req-name" placeholder="Ваше имя" />
+      <input type="tel" id="req-phone" placeholder="Ваш номер телефона" />
+      <button id="send-request">Отправить</button>
+      <p id="req-success"></p>
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const error = document.getElementById('error');
+
+      if (username === 'kamron' && password === '1234') {
+        document.getElementById('login-form').style.display = 'none';
+        const content = document.getElementById('site-content');
+        content.style.display = 'block';
+        document.getElementById('request-btn').style.display = 'block';
+      } else {
+        error.textContent = 'Неверный логин или пароль';
+      }
+    }
+
+    // кнопка + модалка
+    const modal = document.getElementById('request-modal');
+    document.getElementById('request-btn').onclick = () => modal.style.display = 'flex';
+    document.getElementById('close-modal').onclick = () => modal.style.display = 'none';
+
+    // отправка в Telegram
+    document.getElementById('send-request').onclick = async () => {
+      const name = document.getElementById('req-name').value.trim();
+      const phone = document.getElementById('req-phone').value.trim();
+      const success = document.getElementById('req-success');
+
+      if (!name || !phone) {
+        success.style.color = 'red';
+        success.textContent = 'Заполните все поля!';
+        return;
+      }
+
+      // 🔥 ТУТ ВСТАВЬ свой токен и chat_id
+      const BOT_TOKEN = "ВАШ_BOT_TOKEN";
+      const CHAT_ID = "ВАШ_CHAT_ID";
+      const text = `📩 Новая заявка:%0A👤 Имя: ${name}%0A📞 Телефон: ${phone}`;
+
+      try {
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${text}`);
+        success.style.color = 'green';
+        success.textContent = '✅ Заявка отправлена!';
+        document.getElementById('req-name').value = '';
+        document.getElementById('req-phone').value = '';
+      } catch (err) {
+        success.style.color = 'red';
+        success.textContent = 'Ошибка при отправке!';
+      }
+    };
+  </script>
+</body>
+</html>
